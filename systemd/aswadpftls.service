@@ -1,0 +1,16 @@
+[Unit]
+Description=ASWaDPFTLS — авто-обои и палитра темы
+After=graphical-session.target
+PartOf=graphical-session.target
+
+[Service]
+Type=oneshot
+# Бинарь устанавливается через `cargo install --path .` в ~/.cargo/bin.
+ExecStart=%h/.cargo/bin/ASWaDPFTLS
+# awww/swww-демон и переменные окружения Wayland (WAYLAND_DISPLAY, XDG_RUNTIME_DIR)
+# должны быть видны user-менеджеру systemd. Если обои не меняются из сервиса,
+# импортируйте окружение из сессии:
+#   systemctl --user import-environment WAYLAND_DISPLAY XDG_RUNTIME_DIR
+
+[Install]
+WantedBy=graphical-session.target
